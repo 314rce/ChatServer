@@ -5,7 +5,6 @@ var express = require('express'),
     server.listen(8000);
 
 app.use('/client/',express.static('./client/'));
-// app.use('/css/',express.static('./client/css/'));
 
 //all messages in this array.
 var Storage = {
@@ -34,13 +33,6 @@ var storage = createStorage();
 app.get('/',function(req,res){
   res.sendfile('./client/index.html')
 });
-
-//update chat messages
-// app.post('/',function(res){
-//   var messages = db.messages.find().forEach(span(this.name,this.message));
-//   res.sendStatus(201);
-//   res.json(messages);
-// });
 
 var usercount=0;
 
