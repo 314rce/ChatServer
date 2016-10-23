@@ -1,0 +1,22 @@
+{
+  "name": "chatserver",
+  "version": "0.0.1",
+  "description": "Chat service for the house",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "github.com/314rce/ChatServer.git"
+  },
+  "author": "Pierce Byers",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.14.0",
+    "http": "0.0.0",
+    "mongodb": "^2.2.10",
+    "socket.io": "^1.5.0"
+  }
+}

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Chat Server</title>
+    <link rel="stylesheet" href="/client/style.css">
+    <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
+  </head>
+  <body>
+    <div class="chat">
+      <form id="form" class = "pure-form">
+        <div class="chat-name">
+          <input id="username" class="pure-input-rounded" placeholder="Enter your name" style="width:95%" autocomplete="off"></input>
+        </div>
+        <div class="chat-radio">
+          <label for="option-red" class="pure-radio">
+           <input id="option-red" type="radio" name="colorText" value="red">
+           Red
+           </label>
+           <label for="option-blue" class="pure-radio">
+             <input id="option-blue" type="radio" name="colorText" value="blue">
+             Blue
+           </label>
+           <label for="option-black" class="pure-radio">
+             <input id="option-black" type="radio" name="colorText" value="black" checked>
+             Black
+           </label>
+         </div>
+        <div id= "chatmsgs" class="chat-messages">
+
+        </div>
+          <input id="textbox" style ="width: 85%"class="pure-input-rounded" class="chat-textarea" placeholder="Type your message" autocomplete="off"></input>
+          <input type="submit" class="pure-button" style="width:10%"></input>
+      </form>
+      <div>Status: <span id="status" class="chat-status">Idle</span></div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-2.1.0.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.5.0/socket.io.min.js"></script>
+
+  <script>
+
+  jQuery(function($){
+    $('#option-red').on('click',function(){
+      var radioValue = $("input[name='colorText']:checked").val();
+      $('#chatmsgs').css("color",radioValue);
+    });
+    $('#option-blue').on('click',function(){
+      var radioValue=$("input[name='colorText']:checked").val();
+      $('#chatmsgs').css("color",radioValue);
+    })
+    $('#option-black').on('click',function(){
+      var radioValue=$("input[name='colorText']:checked").val();
+      $('#chatmsgs').css("color",radioValue);
+    })
+
+      var socket = io.connect();
+
+      socket.on('connected',function(con){
+        $('#status').html(con).css("color","green");
+      });
+
+      $(window).load(function(){
+        scroll();
+        console.log("length of text: " + $('#chatmsgs').text().length);
+        socket.on('stored-msgs',function(data){
+          if($('#chatmsgs').text().length==10){
+            console.log("stored-msgs incoming")
+            for(var i=0;i<data.length;i++){
+              $('#chatmsgs').append(data[i].msg + "<br/>");
+            }
+          }
+        });
+      });
+
+      function scroll(){
+        console.log($(this).height());
+        $("#chatmsgs").animate({ scrollTop: 999999999999999 }, "slow");
+      }
+
+      $('#form').submit(function(e){
+        console.log($('#username').val().length);
+        e.preventDefault();
+        var name = $('#username').val();
+        var msg = $('#textbox').val();
+        var message = String(name + ": " + msg);
+        socket.emit('send message', message);
+        $('#textbox').val('');
+        if(name.length != 0){
+          $('#username').prop('disabled', true);
+        }
+      });
+
+
+      socket.on('new message',function(data){
+        $('#chatmsgs').append(data + "<br/>");
+        scroll();
+      });
+    });
+
+    </script>
+  </body>
+</html>
