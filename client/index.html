@@ -2,17 +2,30 @@
 <html>
   <head>
     <title>Chat Server</title>
-    <link rel="stylesheet" href="/client/style.css">
+    <link rel="stylesheet" href="./client/css/style.css">
     <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
   </head>
   <body>
-    <div class="chat">
+
+    <div class="chat" align="center">
+      <div id="title" align="center">Chat Server</div>
+
       <form id="name-form" class="pure-form">
-        <div class="chat-name">
+        <div class="chat-name" align="center">
           <input id="username" class="pure-input-rounded" placeholder="Enter your name" style="width:95%" autocomplete="off"></input>
         </div>
       </form>
       <form id="form" class = "pure-form">
+
+        <div id= "chatmsgs" class="chat-messages" align="left">
+
+        </div>
+          <input id="textbox" style ="width: 85%"class="pure-input-rounded" class="chat-textarea" placeholder="Type your message" autocomplete="off"></input>
+          <input type="submit" class="pure-button pure-button-primary" style="width:10%"></input>
+      </form>
+
+      <div>Status: <span id="status" class="chat-status">Idle</span> Online Users: <span id="online"></span></div>
+      <form class="pure-form">
         <div class="chat-radio">
           <label for="option-red" class="pure-radio">
            <input id="option-red" type="radio" name="colorText" value="red">
@@ -27,13 +40,7 @@
              Black
            </label>
          </div>
-        <div id= "chatmsgs" class="chat-messages">
-
-        </div>
-          <input id="textbox" style ="width: 85%"class="pure-input-rounded" class="chat-textarea" placeholder="Type your message" autocomplete="off"></input>
-          <input type="submit" class="pure-button" style="width:10%"></input>
-      </form>
-      <div>Status: <span id="status" class="chat-status">Idle</span> Online Users: <span id="online"></span></div>
+       </form>
     </div>
 
     <script src="https://code.jquery.com/jquery-2.1.0.js"></script>

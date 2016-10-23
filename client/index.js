@@ -52,7 +52,7 @@ jQuery(function($){
     scroll();
   });
 
-  //when a new message is incoming from the server 
+  //when a new message is incoming from the server
   socket.on('new message',function(data){
     console.log(data.name + ": " + data.msg);
     $('#chatmsgs').append(data.name + ": " + data.msg + "<br/>");
@@ -61,15 +61,25 @@ jQuery(function($){
 
   //when the page load
   $(window).load(function(){
+    $('#username').focus();
     console.log($('#username').text().length);
 
       //if the name field is empty
-      if($('#username').text().length==0){
+      if($('#username').val().length==0){
         $('#textbox').prop('disabled',true); //disable the textbox
+
         $('#name-form').submit(function(e){ //when the name field is submitted
-          e.preventDefault();
-          $('#username').prop('disabled',true);//enable the textbox
-          $('#textbox').prop('disabled',false);//then disable the name field
+          console.log($('#username').val().length);
+          if($('#username').val().length==0){
+            alert("Please submit a valid name");
+            return -1;
+
+          } else if($('#username').val().length!=0) {
+            e.preventDefault();
+            $('#username').prop('disabled',true);//enable the textbox
+            $('#textbox').prop('disabled',false);//then disable the name field
+            $('#textbox').focus();//sets focus to the textbox
+          }
         });
       }
 

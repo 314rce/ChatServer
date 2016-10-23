@@ -5,7 +5,7 @@ var express = require('express'),
     server.listen(8000);
 
 app.use('/client/',express.static('./client/'));
-app.use('/socketio/',express.static(__dirname + '/node_modules/socket.io/'))
+// app.use('/css/',express.static('./client/css/'));
 
 //all messages in this array.
 var Storage = {
