@@ -1,6 +1,5 @@
 body,{
   width:100%;
-  text-shadow: 100;
 }
 textarea,
 input{
@@ -29,13 +28,6 @@ input{
   align-items: center;
 }
 
-.connnect{
-
-}
-
-.disconnet{
-
-}
 .chat-messages,
 .chat textarea,
 .chat-name{
